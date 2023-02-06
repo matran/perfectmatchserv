@@ -92,22 +92,37 @@ class UserDataSerializer(serializers.ModelSerializer):
         model=UserProfile
         fields= ('user_id','isactive','name','bio','gender','email','age','religion','relationtype','subscriptiontype','subscription','paymentid','photo1','photo2','photo3','photo4','photo5','reportlist','blocklist')
     def get_photo1(self, obj):
-        request = self.context.get('request')
-        return obj.photo1.url
+        try:
+            request = self.context.get('request')
+            return obj.photo1.url
+        except Exception as e:
+            return "null"
 
     def get_photo2(self, obj):
-        request = self.context.get('request')
-        return obj.photo2.url
+        try:
+            request = self.context.get('request')
+            return obj.photo2.url
+        except Exception as e:
+            return "null"
 
     def get_photo3(self, obj):
-        request = self.context.get('request')
-        return obj.photo3.url
+        try:
+            request = self.context.get('request')
+            return obj.photo3.url
+        except Exception as e:
+            return "null"
     def get_photo4(self, obj):
-        request = self.context.get('request')
-        return obj.photo4.url
+        try:
+            request = self.context.get('request')
+            return obj.photo4.url
+        except Exception as e:
+            return "null"
     def get_photo5(self, obj):
-        request = self.context.get('request')
-        return obj.photo5.url
+        try:
+            request = self.context.get('request')
+            return obj.photo5.url
+        except Exception as e:
+            return "null"
 
 class FriendRequestSerializer(serializers.ModelSerializer):
     class Meta:
