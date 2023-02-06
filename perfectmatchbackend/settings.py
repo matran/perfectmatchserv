@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
 from pathlib import Path
 import os
 import dj_database_url
@@ -26,13 +25,7 @@ SECRET_KEY = 'django-insecure-x%tgf80-_!wg_=s@=@9^llh2t6(7*ua%dsty7pw34u4^nzg+z*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','10.0.2.2']
-CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:4200',
-    'http://localhost:4200',
-    'http://10.0.2.2:8000',
-    'http://localhost',
-]
+ALLOWED_HOSTS = ["*"]
 AUTH_USER_MODEL = 'perfectmatch.User'
 # Application definition
 
@@ -55,6 +48,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -63,7 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ROOT_URLCONF = 'perfectmatchbackend.urls'
 
 TEMPLATES = [
@@ -89,11 +83,11 @@ WSGI_APPLICATION = 'perfectmatchbackend.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'), conn_max_age=600),
-      # 'default': {
-       # 'ENGINE': 'django.db.backends.postgresql',
-       # 'NAME': 'perfectmatch',
-       # 'USER': 'postgres',
+     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'), conn_max_age=600),
+     #  'default': {
+     #   'ENGINE': 'django.db.backends.postgresql',
+      #  'NAME': 'perfectmatch',
+      #  'USER': 'postgres',
        # 'PASSWORD': 'henry5765',
        # 'HOST': '127.0.0.1',
        # 'PORT': '5432',
