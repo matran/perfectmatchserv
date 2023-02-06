@@ -93,21 +93,21 @@ class UserDataSerializer(serializers.ModelSerializer):
         fields= ('user_id','isactive','name','bio','gender','email','age','religion','relationtype','subscriptiontype','subscription','paymentid','photo1','photo2','photo3','photo4','photo5','reportlist','blocklist')
     def get_photo1(self, obj):
         request = self.context.get('request')
-        return request.build_absolute_uri(obj.photo1.url)
+        return obj.photo1.url
 
     def get_photo2(self, obj):
         request = self.context.get('request')
-        return request.build_absolute_uri(obj.photo2.url)
+        return obj.photo2.url
 
     def get_photo3(self, obj):
         request = self.context.get('request')
-        return request.build_absolute_uri(obj.photo3.url)
+        return obj.photo3.url
     def get_photo4(self, obj):
         request = self.context.get('request')
-        return request.build_absolute_uri(obj.photo4.url)
+        return obj.photo4.url
     def get_photo5(self, obj):
         request = self.context.get('request')
-        return request.build_absolute_uri(obj.photo5.url)
+        return obj.photo5.url
 
 class FriendRequestSerializer(serializers.ModelSerializer):
     class Meta:
