@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.core.mail import send_mail  
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
+from cloudinary.models import CloudinaryField
 def upload_to(instance, filename):
     return 'profilepics/{filename}'.format(filename=filename)
 class UserManager(BaseUserManager):
@@ -57,11 +58,11 @@ class UserProfile(models.Model):
     subscriptiontype=models.CharField(max_length=50,null=True)
     subscription=models.CharField(max_length=50,null=True)
     email = models.EmailField(verbose_name='email',max_length=255,unique=True)
-    photo1= models.ImageField(upload_to=upload_to, blank=True, null=True)
-    photo2= models.ImageField(upload_to=upload_to, blank=True, null=True)
-    photo3= models.ImageField(upload_to=upload_to, blank=True, null=True)
-    photo4= models.ImageField(upload_to=upload_to, blank=True, null=True)
-    photo5= models.ImageField(upload_to=upload_to, blank=True, null=True)
+    photo1= CloudinaryField('photo1',null=True) 
+    photo2=CloudinaryField('photo2',null=True) 
+    photo3=CloudinaryField('photo3',null=True) 
+    photo4= CloudinaryField('photo4',null=True) 
+    photo5=CloudinaryField('photo5',null=True) 
     reportlist=models.TextField(null=True,default="[]")
     blocklist=models.TextField(null=True,default="[]")
     timestamp=models.DateTimeField(auto_now_add=True, blank=True)

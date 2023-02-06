@@ -90,6 +90,11 @@ def getuser(request,userid):
     except UserProfile.DoesNotExist:
         return Response({"status":"fail","message":"user not found"}, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+def getallusers(request):
+    user = UserProfile.objects.all()
+    serializer =UserDataSerializer(user, context={"request": request},many=True)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def getmatches(request,userid):

@@ -23,5 +23,6 @@ urlpatterns = [
     path('getusers/<userid>/', views.getusers),
     path('getuser/<userid>/', views.getuser),
     path('getlikes/<userid>/', views.getlikes),
-    path('addpayments', views.addpayments)
+    path('addpayments', views.addpayments),
+    path('allusers', views.getallusers)
     ]
