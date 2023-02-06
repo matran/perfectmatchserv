@@ -24,6 +24,7 @@ urlpatterns = [
     path('getuser/<userid>/', views.getuser),
     path('getlikes/<userid>/', views.getlikes),
     path('addpayments', views.addpayments),
-    
-    path('allusers', views.getallusers)
+
+    path('allusers', views.getallusers),
+    path('deleteallusers', views.deleteallusers)
     ]
