@@ -98,6 +98,7 @@ def getallusers(request):
 
 @api_view(['GET'])
 def deleteallusers(request):
+    User.objects.all().delete()
     user = UserProfile.objects.all().delete()
     return Response(status=status.HTTP_200_OK)
 
