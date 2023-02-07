@@ -115,7 +115,7 @@ def deletematches(request):
     otheruserid=data['otheruserid']
     try:
         matches1 = Matches.objects.get(userid=userid)
-        matches2=Matches.objects.get(otheruserid=otheruserid)
+        matches2=Matches.objects.get(userid=otheruserid)
         matches1.delete()
         matches2.delete()
         return Response(status=status.HTTP_200_OK)
