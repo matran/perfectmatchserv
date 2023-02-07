@@ -27,5 +27,6 @@ urlpatterns = [
     path('allmatches', views.getallmatches),
     path('deleteallmatches', views.deleteallmatches),
     path('allusers', views.getallusers),
-    path('deleteallusers', views.deleteallusers)
+    path('deleteallusers', views.deleteallusers),
+    path('deletelike/<userid>/', views.deletelike)
     ]

@@ -175,7 +175,14 @@ def getlikes(request, userid):
     user = UserProfile.objects.filter(user_id__in=[like.fromuserid for like in likes])
     serializer =UserDataSerializer(user, context={"request": request}, many=True)
     return Response(serializer.data)
-
+@api_view(['GET'])
+def deletelike(request, userid):
+    try:
+        like = FriendRequests.objects.get(userid=userid)
+        like.delete()
+        return Response(status=status.HTTP_200_OK)
+    except FriendRequests.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)   
 
 
 @api_view(['POST'])
