@@ -178,7 +178,7 @@ def getlikes(request, userid):
 @api_view(['GET'])
 def deletelike(request, userid):
     try:
-        like = FriendRequests.objects.get(userid=userid)
+        like = FriendRequests.objects.get(touserid=userid)
         like.delete()
         return Response(status=status.HTTP_200_OK)
     except FriendRequests.DoesNotExist:
