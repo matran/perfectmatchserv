@@ -96,6 +96,19 @@ def getallusers(request):
     serializer =UserDataSerializer(user, context={"request": request},many=True)
     return Response(serializer.data)
 
+
+@api_view(['GET'])
+def getallmatches(request):
+    user = Matches.objects.all()
+    serializer =MatchesSerializer(user, context={"request": request},many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def deleteallmatches(request):
+    user = Matches.objects.all().delete()
+    return Response(status=status.HTTP_200_OK)
+
+
 @api_view(['GET'])
 def deleteallusers(request):
     User.objects.all().delete()
