@@ -193,6 +193,11 @@ def friendrequests(request):
     serializer = FriendRequestSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
+        touserid=request.data['touserid']
+        fromuserid=request.data['fromuserid']
+        userfrom=UserProfile.objects.get(user_id=fromuserid)
+        fromname=userfrom.name
+        sendNotification("You have been liked by " + fromname+" open the app to view it.", touserid)
         return Response({"status": "success", "message":"data saved"},status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
