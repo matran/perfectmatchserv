@@ -29,5 +29,6 @@ urlpatterns = [
     path('allusers', views.getallusers),
     path('deleteallusers', views.deleteallusers),
     path('deletelike/<userid>/', views.deletelike),
-    path('updatedeviceid', views.updatedeviceid)
+    path('updatedeviceid', views.updatedeviceid),
+    path('testconnection', views.testconnection)
     ]

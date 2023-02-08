@@ -264,6 +264,11 @@ def reportuser(request):
     myuserid=data['userid']
     otheruserid=data['otheruserid']
     return Response({"status":"success"}, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def testconnection(request):
+    return Response({"status":"success"}, status=status.HTTP_200_OK)
+    
 @api_view(['POST'])
 def addpayments(request):
     data = request.data
