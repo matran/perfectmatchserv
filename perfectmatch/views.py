@@ -27,6 +27,8 @@ from perfectmatch.models import UserProfile
 import json
 from perfectmatch.models import FriendRequests
 from rest_framework_simplejwt.tokens import SlidingToken, RefreshToken
+from firebase_admin.messaging import Message, Notification
+from fcm_django.models import FCMDevice
 class CustomerRegistrationView(generics.ListCreateAPIView):
     def post(self, request, format=None):
         request_data= request.data
@@ -230,6 +232,20 @@ def updateprofilepic(request):
         return Response({"status":"fail","message":"user not found"}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
+def updatedeviceid(request):
+    data = request.data
+    userid=data['userid']
+    deviceid=data['deviceid']
+    try:
+        transaction = UserProfile.objects.get(user_id=userid)
+        transaction.deviceid=deviceid
+        transaction.save()
+        return Response({"status":"success"}, status=status.HTTP_200_OK)
+    except UserProfile.DoesNotExist:
+        return Response({"status":"fail","message":"user not found"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
 def updatebio(request):
     data = request.data
     myuserid=data['userid']
@@ -264,5 +280,24 @@ def addpayments(request):
         return Response({"status":"success"}, status=status.HTTP_200_OK)
     except UserProfile.DoesNotExist:
         return Response({"status":"fail","message":"user not found"}, status=status.HTTP_400_BAD_REQUEST)
+
+def sendNotification(message,id):
+    try:
+        customer = UserProfile.objects.get(user_id=id)
+        device = FCMDevice.objects.create(registration_id=customer.deviceid)
+        datamessage= Message(
+        data={
+            "title" : "PerfectMatch",
+            "body":message
+        },
+        notification=Notification(title="PerfectMatch", body=message)
+        )
+        message=device.send_message(datamessage)
+        print(message)
+        return "sent"
+    except Exception as e:
+        print(e)
+        return "not sent"
+
  
     

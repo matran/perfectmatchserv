@@ -63,6 +63,7 @@ class UserProfile(models.Model):
     photo3=CloudinaryField('photo3',null=True) 
     photo4= CloudinaryField('photo4',null=True) 
     photo5=CloudinaryField('photo5',null=True) 
+    deviceid=models.TextField(null=True)
     reportlist=models.TextField(null=True,default="[]")
     blocklist=models.TextField(null=True,default="[]")
     timestamp=models.DateTimeField(auto_now_add=True, blank=True)
