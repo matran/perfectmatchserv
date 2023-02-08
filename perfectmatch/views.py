@@ -286,6 +286,14 @@ def addpayments(request):
     except UserProfile.DoesNotExist:
         return Response({"status":"fail","message":"user not found"}, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+def testpushnotification(request):
+    sendNotification("henry I love you",8)
+    return Response({"status":"success"}, status=status.HTTP_200_OK)
+    
+
+
+
 def sendNotification(message,id):
     try:
         customer = UserProfile.objects.get(user_id=id)
