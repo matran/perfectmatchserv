@@ -31,5 +31,7 @@ urlpatterns = [
     path('deletelike/<userid>/', views.deletelike),
     path('updatedeviceid', views.updatedeviceid),
     path('testconnection', views.testconnection),
-    path('testpushnotification', views.testpushnotification)
+    path('testpushnotification', views.testpushnotification),
+    path('versioning/<update>/', views.versioning),
+    path('versioningstatus', views.versioningstatus)
     ]

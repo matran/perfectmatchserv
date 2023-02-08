@@ -13,6 +13,13 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from cloudinary.models import CloudinaryField
 def upload_to(instance, filename):
     return 'profilepics/{filename}'.format(filename=filename)
+
+class Versioning(models.Model):
+    name=models.CharField(max_length=20)
+    update=models.BooleanField(default=False)
+    class Meta:
+        db_table = "versioning"
+
 class UserManager(BaseUserManager):
     def create_user(self,email, password=None):
         if not email:
@@ -83,7 +90,6 @@ class Matches(models.Model):
     chatid=models.TextField()
     class Meta:
         db_table = "matches"
-
 
 class ReportedUsers(models.Model):
     userid= models.IntegerField()

@@ -29,6 +29,7 @@ from perfectmatch.models import FriendRequests
 from rest_framework_simplejwt.tokens import SlidingToken, RefreshToken
 from firebase_admin.messaging import Message, Notification
 from fcm_django.models import FCMDevice
+from perfectmatch.models import Versioning
 class CustomerRegistrationView(generics.ListCreateAPIView):
     def post(self, request, format=None):
         request_data= request.data
@@ -292,7 +293,26 @@ def testpushnotification(request):
     return Response({"status":"success"}, status=status.HTTP_200_OK)
     
 
+@api_view(['GET'])
+def versioning(request,update):
+    try:
+        transaction = Versioning.objects.get(name="perfectmatch")
+        transaction.update=update
+        transaction.save()
+        return Response({"status":"success"}, status=status.HTTP_200_OK)
+    except Versioning.DoesNotExist:
+        transaction=Versioning.objects.create(name="perfectmatch",update=update)
+        transaction.save()
+        return Response({"status":"success","message":"created"}, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+def versioningstatus(request):
+    try:
+        transaction = Versioning.objects.get(name="perfectmatch")
+        update=transaction.update
+        return Response({"status":"success","status":update}, status=status.HTTP_200_OK)
+    except Versioning.DoesNotExist:
+        return Response({"status":"fail"}, status=status.HTTP_404_NOT_FOUND)
 
 def sendNotification(message,id):
     try:
